@@ -2,7 +2,7 @@
 COMP 163 - Project 3: Quest Chronicles
 Inventory System Module - Starter Code
 
-Name: [Your Name Here]
+Name: Brittney Rouse
 
 AI Usage: [Document any AI assistance used]
 
@@ -37,7 +37,10 @@ def add_item_to_inventory(character, item_id):
     # TODO: Implement adding items
     # Check if inventory is full (>= MAX_INVENTORY_SIZE)
     # Add item_id to character['inventory'] list
-    pass
+    character_data[inventory].append(item_id)
+    if len(inventory) >= max_inventory_size:
+        raise InventoryFullError
+    
 
 def remove_item_from_inventory(character, item_id):
     """
@@ -53,7 +56,11 @@ def remove_item_from_inventory(character, item_id):
     # TODO: Implement item removal
     # Check if item exists in inventory
     # Remove item from list
-    pass
+    if item_id is in character_data[inventory]:
+        del inventory[item_id]
+    else:
+        raise ItemNotFoundError
+    
 
 def has_item(character, item_id):
     """
@@ -62,7 +69,11 @@ def has_item(character, item_id):
     Returns: True if item in inventory, False otherwise
     """
     # TODO: Implement item check
-    pass
+    if item_id is in character_data[inventory]:
+        return True
+    else:
+        return False
+
 
 def count_item(character, item_id):
     """
@@ -72,7 +83,8 @@ def count_item(character, item_id):
     """
     # TODO: Implement item counting
     # Use list.count() method
-    pass
+    return character_data[inventory].count(item_id)
+    
 
 def get_inventory_space_remaining(character):
     """
@@ -81,7 +93,9 @@ def get_inventory_space_remaining(character):
     Returns: Integer representing available slots
     """
     # TODO: Implement space calculation
-    pass
+    remaining_space = max_inventory_size - len(character_data[inventory])
+    return remaining_space
+    
 
 def clear_inventory(character):
     """
@@ -92,7 +106,12 @@ def clear_inventory(character):
     # TODO: Implement inventory clearing
     # Save current inventory before clearing
     # Clear character's inventory list
-    pass
+    removed_items = character_data[inventory]
+    if len(character_data[inventory]) > 0:
+        character_data[inventory].pop(0)
+        continue
+    return = removed_items
+
 
 # ============================================================================
 # ITEM USAGE
