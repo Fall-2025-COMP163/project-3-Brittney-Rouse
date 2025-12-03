@@ -2,7 +2,7 @@
 COMP 163 - Project 3: Quest Chronicles
 Game Data Module - Starter Code
 
-Name: [Your Name Here]
+Name: [Brittney Rouse]
 
 AI Usage: [Document any AI assistance used]
 
@@ -41,7 +41,17 @@ def load_quests(filename="data/quests.txt"):
     # - FileNotFoundError → raise MissingDataFileError
     # - Invalid format → raise InvalidDataFormatError
     # - Corrupted/unreadable data → raise CorruptedDataError
-    pass
+    try:
+        quest_dictionary = {quest_id: unique_quest_name, title: quest_display_title, description: quest_description_text, reward_xp: quest_reward_xp, reward_gold: quest_reward_gold,
+                        required_level: quest_required_level, prerequisite: previous_quest_id)
+    except FileNotFoundError:
+        raise MissingDataFileError
+    except ___:
+        raise InvalidDataFormatError
+    except ___:
+        raise CorruptedDataError
+    return quest_dictionary
+
 
 def load_items(filename="data/items.txt"):
     """
@@ -60,7 +70,17 @@ def load_items(filename="data/items.txt"):
     """
     # TODO: Implement this function
     # Must handle same exceptions as load_quests
-    pass
+    try:
+        items_dictionary = {item_id: unique_item_name, name: item_display_name, type: item_display_type, effect: stat_name:value, cost: item_cost,
+                                 description: item_description}
+    except FileNotFoundError:
+        raise MissingDataFileError
+    except ___:
+        raise InvalidDataFormatError
+    except ___:
+        raise CorruptedDataError
+    return items_dictionary
+    
 
 def validate_quest_data(quest_dict):
     """
@@ -75,7 +95,14 @@ def validate_quest_data(quest_dict):
     # TODO: Implement validation
     # Check that all required keys exist
     # Check that numeric values are actually numbers
-    pass
+    try:
+        if len(quest_dictionary) < 7:
+            raise InvalidDataFormatError
+        if (reward_xp ) or (reward_gold ) or (required_level ) or (prerequisite ):
+            raise InvalidDataFormatError
+        else:
+            return True
+    
 
 def validate_item_data(item_dict):
     """
@@ -88,7 +115,14 @@ def validate_item_data(item_dict):
     Raises: InvalidDataFormatError if missing required fields or invalid type
     """
     # TODO: Implement validation
-    pass
+    try:
+        if items_dictionary < 6:
+            raise InvalidDataFormatError
+        if (type != "Weapon") or (type != "Armor") or (type != "Consumable"):
+            raise InvalidDataFormatError
+        else:
+            return True
+
 
 def create_default_data_files():
     """
