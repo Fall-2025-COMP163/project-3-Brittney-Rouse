@@ -2,7 +2,7 @@
 COMP 163 - Project 3: Quest Chronicles
 Character Manager Module - Starter Code
 
-Name: [Your Name Here]
+Name: Brittney Rouse
 
 AI Usage: [Document any AI assistance used]
 
@@ -10,6 +10,7 @@ This module handles character creation, loading, and saving.
 """
 
 import os
+import csv
 from custom_exceptions import (
     InvalidCharacterClassError,
     CharacterNotFoundError,
@@ -47,7 +48,43 @@ def create_character(name, character_class):
     # - inventory=[], active_quests=[], completed_quests=[]
     
     # Raise InvalidCharacterClassError if class not in valid list
-    pass
+    character_class = input()
+    character_level = 1
+    character_experience = 0
+    gold = 100
+    inventory = []
+    active_quests = []
+    completed_quests = []
+
+    if character_class == "Warrior":
+        health = 120
+        strength = 15
+        magic = 5
+        max_health = 360
+    if character_class == "Mage":
+        health = 80
+        strength = 8
+        magic = 20
+        max_health = 240
+    if character_class == "Rogue":
+        health = 90
+        strength = 12
+        magic = 10
+        max_health = 270
+    if character_class == "Cleric":
+        health = 100
+        strength = 10
+        magic = 15
+        max_health = 300
+
+    if character_class not in valid_classes:
+        raise InvalidCharacterClassError
+
+    character_data = {name, "Class": character_class, "Level": character_level, "Health": health, "Max health": max_health, "Strength": strength, "Magic": magic, "Experience":
+character_experience, "Gold": gold, "Inventory": inventory, "Active quests": active_quests, "Completed quests": completed_quests}
+        
+    return character_data
+
 
 def save_character(character, save_directory="data/save_games"):
     """
@@ -76,7 +113,25 @@ def save_character(character, save_directory="data/save_games"):
     # Create save_directory if it doesn't exist
     # Handle any file I/O errors appropriately
     # Lists should be saved as comma-separated values
-    pass
+    try:
+        filename = {charater_name}_save.txt
+        print(f"NAME: {character_name}")
+        print(f"CLASS: {class_name}")
+        print(f"LEVEL: {character_level}")
+        print(f"HEALTH: {health}")
+        print(f"MAX_HEALTH: {max_health}")
+        print(f"STRENGTH: {strength}")
+        print(f"MAGIC: {magic}")
+        print(f"EXPERIENCE: {character_experience}")
+        print(f"GOLD: {gold}")
+        print(f"INVENTORY: {inventory}")
+        print(f"ACTIVE QUESTS: {active_quests}")
+        print(f"COMPLETED QUESTS: {completed_quests}")
+    except:
+        raise PermissionError
+        raise IOError
+    return True
+    
 
 def load_character(character_name, save_directory="data/save_games"):
     """
@@ -97,7 +152,11 @@ def load_character(character_name, save_directory="data/save_games"):
     # Try to read file → SaveFileCorruptedError
     # Validate data format → InvalidSaveDataError
     # Parse comma-separated lists back into Python lists
-    pass
+    raise CharacterNotFoundError
+    raise SaveFileCorruptedError
+    raise InvalidSaveDataError
+    return character_data
+    
 
 def list_saved_characters(save_directory="data/save_games"):
     """
@@ -108,7 +167,11 @@ def list_saved_characters(save_directory="data/save_games"):
     # TODO: Implement this function
     # Return empty list if directory doesn't exist
     # Extract character names from filenames
-    pass
+    all_saved_characters = character_data[name]
+    if :
+        all_saved_characters = []
+    return all_saved_characters
+    
 
 def delete_character(character_name, save_directory="data/save_games"):
     """
@@ -119,7 +182,11 @@ def delete_character(character_name, save_directory="data/save_games"):
     """
     # TODO: Implement character deletion
     # Verify file exists before attempting deletion
-    pass
+    try:
+        if :
+            raise CharacterNotFoundError
+    return True
+    
 
 # ============================================================================
 # CHARACTER OPERATIONS
@@ -144,7 +211,19 @@ def gain_experience(character, xp_amount):
     # Add experience
     # Check for level up (can level up multiple times)
     # Update stats on level up
-    pass
+    level_up_xp = level * 100
+
+    if (health > 0) and (character_experience >= level_up_xp):
+        level += 1
+        max_health += 10
+        strength += 2
+        magic += 2
+        health = max_health
+        character_experience = character_experience - level_up_xp
+        continue
+    if health == 0:
+        raise CharacterDeadError
+    
 
 def add_gold(character, amount):
     """
@@ -160,7 +239,12 @@ def add_gold(character, amount):
     # TODO: Implement gold management
     # Check that result won't be negative
     # Update character's gold
-    pass
+    gold += amount
+    if gold < 0:
+        raise ValueError
+        
+    return gold
+    
 
 def heal_character(character, amount):
     """
@@ -173,7 +257,13 @@ def heal_character(character, amount):
     # TODO: Implement healing
     # Calculate actual healing (don't exceed max_health)
     # Update character health
-    pass
+    health += amount
+    if health > max_health:
+        leftover_healing = health - max_health
+        health = health - amount
+        health = health + leftover_healing
+    return health
+    
 
 def is_character_dead(character):
     """
@@ -182,7 +272,10 @@ def is_character_dead(character):
     Returns: True if dead, False if alive
     """
     # TODO: Implement death check
-    pass
+    if health > 0:
+        return True
+    else:
+        return False
 
 def revive_character(character):
     """
@@ -192,7 +285,8 @@ def revive_character(character):
     """
     # TODO: Implement revival
     # Restore health to half of max_health
-    pass
+    health = max_health * .5
+    return True
 
 # ============================================================================
 # VALIDATION
@@ -213,7 +307,14 @@ def validate_character_data(character):
     # Check all required keys exist
     # Check that numeric values are numbers
     # Check that lists are actually lists
-    pass
+    if len(character_data) < 12:
+        raise InvalidSaveDataError
+    if :
+        raise InvalidSaveDataError
+    if wasd:
+        raise InvalidSaveDataError
+    
+    
 
 # ============================================================================
 # TESTING
